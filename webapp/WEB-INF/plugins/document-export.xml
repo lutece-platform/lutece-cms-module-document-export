@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plug-in>
+    
+    <!-- Plugin informations -->
+    <name>document-export</name>
+    <class>fr.paris.lutece.portal.service.plugin.PluginDefaultImplementation</class>
+    <version>1.0.0</version>
+    <documentation></documentation>
+    <installation></installation>
+    <changes></changes>
+    <user-guide></user-guide>
+    <description>module.document.export.module.description</description>
+    <provider>module.document.export.module.provider</provider>
+    <provider-url>http://lutece.paris.fr</provider-url>
+    <icon-url>images/admin/skin/plugins/document/modules/export/document.png</icon-url>
+    <copyright>Copyright 2001-2010 Mairie de Paris</copyright>
+    <db-pool-required>1</db-pool-required>
+    
+    <!-- Dashboard  components -->
+    <dashboard-components>
+    </dashboard-components>
+    
+    <!-- Administration interface parameters -->
+    <admin-features>
+	</admin-features>
+	
+	<!-- Daemons -->
+    <daemons>
+	</daemons>
+	
+	<!-- Applications -->
+	<applications>
+	</applications>
+	
+</plug-in>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<bean id="document-export.exportService"
+		class="fr.paris.lutece.plugins.document.modules.export.service.DocumentExportService" />
+	<bean id="document-export.exportDAO"
+		class="fr.paris.lutece.plugins.document.modules.export.business.DocumentExportDAO" />	
+	<bean id="document-export.exportPostStartupService"
+		class="fr.paris.lutece.plugins.document.modules.export.service.DocumentExportPostStartupService" />	
+
+</beans>
