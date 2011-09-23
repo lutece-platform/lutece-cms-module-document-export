@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<plug-in>
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?><plug-in>
     
     <!-- Plugin informations -->
     <name>document-export</name>
     <class>fr.paris.lutece.portal.service.plugin.PluginDefaultImplementation</class>
     <version>1.0.0</version>
-    <documentation></documentation>
-    <installation></installation>
-    <changes></changes>
-    <user-guide></user-guide>
+    <documentation/>
+    <installation/>
+    <changes/>
+    <user-guide/>
     <description>module.document.export.module.description</description>
     <provider>module.document.export.module.provider</provider>
     <provider-url>http://lutece.paris.fr</provider-url>
