@@ -46,4 +46,11 @@
         <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/cms/module-document-export</developerConnection>
         <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/trunk/plugins/cms/module-document-export</url>
     </scm>
+    
+    <properties>
+		<componentName>document-export</componentName>
+		<jiraProjectName>DOCUMENTEXPORT</jiraProjectName>
+		<jiraComponentId>10600</jiraComponentId>
+	</properties>
+
 </project>
