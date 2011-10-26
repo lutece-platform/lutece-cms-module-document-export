@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2011, Mairie de Paris
+ * Copyright (c) 2002-2010, Mairie de Paris
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,14 @@
  */
 package fr.paris.lutece.plugins.document.modules.export.web;
 
-import au.com.bytecode.opencsv.CSVWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.StringWriter;
+import java.util.List;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import fr.paris.lutece.plugins.document.business.DocumentFilter;
 import fr.paris.lutece.plugins.document.modules.export.dto.exportdocument.ExportUserDocumentDTO;
@@ -47,96 +54,92 @@ import fr.paris.lutece.portal.service.util.AppPathService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.portal.web.admin.PluginAdminPageJspBean;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.StringWriter;
+import au.com.bytecode.opencsv.CSVWriter;
 
-import java.util.List;
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-
-/**
- *
- * DocumentExportJspBean.
- */
 public class DocumentExportJspBean extends PluginAdminPageJspBean
 {
-    // constants
-    private static final char CONSTANT_SEPARATOR = ';';
-    private static final String CONSTANT_DOCUMENT_PLUGIN_DEFAULT_NAME = "document";
-    private static final String CONSTANT_EXPORT_FILE_NAME_DEFAULT = "documents_export.csv";
 
-    // properties
-    private static final String PROPERTY_EXPORT_FILE_NAME = "document-export.export_documents.file.name";
-    private static final String PROPERTY_EXPORT_FILE_ENCODING = "document-export.export_documents.file.encoding";
-    private static final String PROPERTY_DOCUMENT_PLUGIN_NAME = "document-export.plugin.document.name";
-    private static final String PROPERTY_PLUGIN_DISABLED = "module.document.export.error.plugin.disabled.message";
-    private DocumentExportService _documentExportService = (DocumentExportService) SpringContextService.getPluginBean( "document-export",
-            "document-export.exportService" );
+	// constants
+	private static final char CONSTANT_SEPARATOR = ';';
 
-    /**
-     * Exports a document list
-     * @param request the request
-     * @param response the response
-     * @return the base url
-     */
-    public String doExportDocumentsDataList( HttpServletRequest request, HttpServletResponse response )
-    {
-        if ( !PluginService.isPluginEnable( AppPropertiesService.getProperty( PROPERTY_DOCUMENT_PLUGIN_NAME,
-                        CONSTANT_DOCUMENT_PLUGIN_DEFAULT_NAME ) ) )
-        {
-            return AdminMessageService.getMessageUrl( request, PROPERTY_PLUGIN_DISABLED, AdminMessage.TYPE_ERROR );
-        }
+	private static final String CONSTANT_DOCUMENT_PLUGIN_DEFAULT_NAME = "document";
 
-        DocumentFilter filter = new DocumentFilter(  );
+	private static final String CONSTANT_EXPORT_FILE_NAME_DEFAULT = "documents_export.csv";
+	
+	private static final String[] CONSTANT_HEADER_CSV_FILE =
+	{ "Identifiant", "Titre", "Type", "Etat", "Date de début de validité", "Date de fin de validité", "Date de création", "Date de modification", "Espace" };
 
-        /*
-         * Filter constructing
-         */
-        Locale locale = getLocale(  );
+	// properties
+	private static final String PROPERTY_EXPORT_FILE_NAME = "document-export.export_documents.file.name";
 
-        List<ExportUserDocumentDTO> listExportResults = _documentExportService.getListDocumentByFilter( filter, locale );
+	private static final String PROPERTY_EXPORT_FILE_ENCODING="document-export.export_documents.file.encoding";
+	
+	private static final String PROPERTY_DOCUMENT_PLUGIN_NAME = "document-export.plugin.document.name";
 
-        try
-        {
-            StringWriter strWriter = new StringWriter(  );
-            CSVWriter csvWriter = new CSVWriter( strWriter, CONSTANT_SEPARATOR );
+	private static final String PROPERTY_PLUGIN_DISABLED = "module.document.export.error.plugin.disabled.message";
 
-            for ( ExportUserDocumentDTO documentData : listExportResults )
-            {
-                csvWriter.writeNext( documentData.toTabString(  ) );
-            }
+	private DocumentExportService _documentExportService = ( DocumentExportService ) SpringContextService.getPluginBean( "document-export", "document-export.exportService" );
 
-            String strEncoding = AppPropertiesService.getProperty( PROPERTY_EXPORT_FILE_ENCODING );
-            byte[] byteFileOutPut = strWriter.toString(  ).getBytes( strEncoding );
+	/**
+	 * Effectue l'export de la liste des documents
+	 * @param request la requete Http
+	 * @param response la reponse
+	 */
+	public String doExportDocumentsDataList( HttpServletRequest request, HttpServletResponse response )
+	{
+		if ( !PluginService.isPluginEnable( AppPropertiesService.getProperty( PROPERTY_DOCUMENT_PLUGIN_NAME, CONSTANT_DOCUMENT_PLUGIN_DEFAULT_NAME ) ) )
+		{
 
-            String strFileName = AppPropertiesService.getProperty( PROPERTY_EXPORT_FILE_NAME,
-                    CONSTANT_EXPORT_FILE_NAME_DEFAULT );
-            response.setHeader( "Content-Disposition", "attachment; filename=\"" + strFileName + " \";" );
-            response.setHeader( "Pragma", "public" );
-            response.setHeader( "Expires", "0" );
-            response.setHeader( "Cache-Control", "must-revalidate,post-check=0,pre-check=0" );
-            response.setContentType( "enctype=multipart/form-data" );
+			return AdminMessageService.getMessageUrl( request, PROPERTY_PLUGIN_DISABLED, AdminMessage.TYPE_ERROR );
+		}
 
-            OutputStream os = response.getOutputStream(  );
-            os.write( byteFileOutPut );
-            os.close(  );
+		DocumentFilter filter = new DocumentFilter();
+		/*
+		 * Construction du filtre
+		 */
 
-            csvWriter.close(  );
-            strWriter.close(  );
-        }
-        catch ( IOException e )
-        {
-            AppLogService.error( e.getMessage(  ), e );
-        }
-        catch ( Exception e )
-        {
-            AppLogService.error( e.getMessage(  ), e );
-        }
+		Locale locale = getLocale();
 
-        return AppPathService.getBaseUrl( request );
-    }
+		List<ExportUserDocumentDTO> listExportResults = _documentExportService.getListDocumentByFilter( filter, locale );
+
+		try
+		{
+			StringWriter strWriter = new StringWriter();
+			CSVWriter csvWriter = new CSVWriter( strWriter, CONSTANT_SEPARATOR );
+			csvWriter.writeNext(CONSTANT_HEADER_CSV_FILE);
+			for ( ExportUserDocumentDTO documentData : listExportResults )
+			{
+				csvWriter.writeNext( documentData.toTabString() );
+			}
+			String strEncoding = AppPropertiesService.getProperty(PROPERTY_EXPORT_FILE_ENCODING);
+			byte[] byteFileOutPut = strWriter.toString().getBytes(strEncoding);
+
+			String strFileName = AppPropertiesService.getProperty( PROPERTY_EXPORT_FILE_NAME, CONSTANT_EXPORT_FILE_NAME_DEFAULT );
+			response.setHeader( "Content-Disposition", "attachment; filename=\"" + strFileName + " \";" );
+			response.setHeader( "Pragma", "public" );
+			response.setHeader( "Expires", "0" );
+			response.setHeader( "Cache-Control", "must-revalidate,post-check=0,pre-check=0" );
+			response.setContentType( "enctype=multipart/form-data" );
+
+			OutputStream os = response.getOutputStream();
+			os.write( byteFileOutPut );
+			os.close();
+
+			csvWriter.close();
+			strWriter.close();
+
+		}
+		catch ( IOException e )
+		{
+			AppLogService.error( e.getMessage(), e );
+		}
+		catch ( Exception e )
+		{
+			AppLogService.error( e.getMessage(), e );
+		}
+
+		return AppPathService.getBaseUrl( request );
+
+	}
+
 }
