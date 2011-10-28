@@ -56,6 +56,11 @@ import fr.paris.lutece.portal.web.admin.PluginAdminPageJspBean;
 
 import au.com.bytecode.opencsv.CSVWriter;
 
+/**
+ * 
+ * The DocumentExport JspBean
+ * 
+ */
 public class DocumentExportJspBean extends PluginAdminPageJspBean
 {
 
@@ -65,15 +70,15 @@ public class DocumentExportJspBean extends PluginAdminPageJspBean
 	private static final String CONSTANT_DOCUMENT_PLUGIN_DEFAULT_NAME = "document";
 
 	private static final String CONSTANT_EXPORT_FILE_NAME_DEFAULT = "documents_export.csv";
-	
+
 	private static final String[] CONSTANT_HEADER_CSV_FILE =
 	{ "Identifiant", "Titre", "Type", "Etat", "Date de début de validité", "Date de fin de validité", "Date de création", "Date de modification", "Espace" };
 
 	// properties
 	private static final String PROPERTY_EXPORT_FILE_NAME = "document-export.export_documents.file.name";
 
-	private static final String PROPERTY_EXPORT_FILE_ENCODING="document-export.export_documents.file.encoding";
-	
+	private static final String PROPERTY_EXPORT_FILE_ENCODING = "document-export.export_documents.file.encoding";
+
 	private static final String PROPERTY_DOCUMENT_PLUGIN_NAME = "document-export.plugin.document.name";
 
 	private static final String PROPERTY_PLUGIN_DISABLED = "module.document.export.error.plugin.disabled.message";
@@ -84,6 +89,7 @@ public class DocumentExportJspBean extends PluginAdminPageJspBean
 	 * Effectue l'export de la liste des documents
 	 * @param request la requete Http
 	 * @param response la reponse
+	 * @return
 	 */
 	public String doExportDocumentsDataList( HttpServletRequest request, HttpServletResponse response )
 	{
@@ -106,13 +112,13 @@ public class DocumentExportJspBean extends PluginAdminPageJspBean
 		{
 			StringWriter strWriter = new StringWriter();
 			CSVWriter csvWriter = new CSVWriter( strWriter, CONSTANT_SEPARATOR );
-			csvWriter.writeNext(CONSTANT_HEADER_CSV_FILE);
+			csvWriter.writeNext( CONSTANT_HEADER_CSV_FILE );
 			for ( ExportUserDocumentDTO documentData : listExportResults )
 			{
 				csvWriter.writeNext( documentData.toTabString() );
 			}
-			String strEncoding = AppPropertiesService.getProperty(PROPERTY_EXPORT_FILE_ENCODING);
-			byte[] byteFileOutPut = strWriter.toString().getBytes(strEncoding);
+			String strEncoding = AppPropertiesService.getProperty( PROPERTY_EXPORT_FILE_ENCODING );
+			byte[] byteFileOutPut = strWriter.toString().getBytes( strEncoding );
 
 			String strFileName = AppPropertiesService.getProperty( PROPERTY_EXPORT_FILE_NAME, CONSTANT_EXPORT_FILE_NAME_DEFAULT );
 			response.setHeader( "Content-Disposition", "attachment; filename=\"" + strFileName + " \";" );
