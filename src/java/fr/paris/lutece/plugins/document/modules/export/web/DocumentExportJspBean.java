@@ -72,7 +72,7 @@ public class DocumentExportJspBean extends PluginAdminPageJspBean
 	private static final String CONSTANT_EXPORT_FILE_NAME_DEFAULT = "documents_export.csv";
 
 	private static final String[] CONSTANT_HEADER_CSV_FILE =
-	{ "Identifiant", "Titre", "Type", "Etat", "Date de début de validité", "Date de fin de validité", "Date de création", "Date de modification", "Espace" };
+	{ "Identifiant", "Titre", "Type", "Etat", "Date de dÃ©but de validitÃ©", "Date de fin de validitÃ©", "Date de crÃ©ation", "Date de modification", "Espace" };
 
 	// properties
 	private static final String PROPERTY_EXPORT_FILE_NAME = "document-export.export_documents.file.name";
