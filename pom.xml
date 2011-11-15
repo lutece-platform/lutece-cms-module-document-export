@@ -9,7 +9,7 @@
 	<groupId>fr.paris.lutece.plugins</groupId>
 	<artifactId>module-document-export</artifactId>
 	<packaging>lutece-plugin</packaging>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<name>Lutece document export module</name>
 	
 	<repositories>
@@ -42,9 +42,9 @@
 	</dependencies>
 
     <scm>
-        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/cms/module-document-export</connection>
-        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/cms/module-document-export</developerConnection>
-        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/trunk/plugins/cms/module-document-export</url>
+        <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/tags/module-document-export-1.0.1</connection>
+        <developerConnection>scm:svn:https://dev.lutece.paris.fr/svn/lutece/portal/tags/module-document-export-1.0.1</developerConnection>
+        <url>http://dev.lutece.paris.fr/viewvc/lutece/portal/tags/module-document-export-1.0.1</url>
     </scm>
     
     <properties>
