@@ -36,6 +36,7 @@ package fr.paris.lutece.plugins.document.modules.export.web;
 import fr.paris.lutece.plugins.document.business.DocumentFilter;
 import fr.paris.lutece.plugins.document.modules.export.dto.exportdocument.ExportUserDocumentDTO;
 import fr.paris.lutece.plugins.document.modules.export.service.DocumentExportService;
+import fr.paris.lutece.plugins.document.service.DocumentPlugin;
 import fr.paris.lutece.portal.service.message.AdminMessage;
 import fr.paris.lutece.portal.service.message.AdminMessageService;
 import fr.paris.lutece.portal.service.plugin.PluginService;
@@ -94,9 +95,8 @@ public class DocumentExportJspBean extends PluginAdminPageJspBean
      */
 	public String doExportDocumentsDataList( HttpServletRequest request, HttpServletResponse response )
 	{
-		if ( !PluginService.isPluginEnable( AppPropertiesService.getProperty( PROPERTY_DOCUMENT_PLUGIN_NAME, CONSTANT_DOCUMENT_PLUGIN_DEFAULT_NAME ) ) )
+        if ( !PluginService.isPluginEnable( DocumentPlugin.PLUGIN_NAME ) )
 		{
-
 			return AdminMessageService.getMessageUrl( request, PROPERTY_PLUGIN_DISABLED, AdminMessage.TYPE_ERROR );
 		}
 
