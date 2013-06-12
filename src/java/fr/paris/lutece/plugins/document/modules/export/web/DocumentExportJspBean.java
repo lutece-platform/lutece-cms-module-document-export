@@ -68,8 +68,6 @@ public class DocumentExportJspBean extends PluginAdminPageJspBean
 	// constants
 	private static final char CONSTANT_SEPARATOR = ';';
 
-	private static final String CONSTANT_DOCUMENT_PLUGIN_DEFAULT_NAME = "document";
-
 	private static final String CONSTANT_EXPORT_FILE_NAME_DEFAULT = "documents_export.csv";
 
 	private static final String[] CONSTANT_HEADER_CSV_FILE =
@@ -79,8 +77,6 @@ public class DocumentExportJspBean extends PluginAdminPageJspBean
 	private static final String PROPERTY_EXPORT_FILE_NAME = "document-export.export_documents.file.name";
 
 	private static final String PROPERTY_EXPORT_FILE_ENCODING = "document-export.export_documents.file.encoding";
-
-	private static final String PROPERTY_DOCUMENT_PLUGIN_NAME = "document-export.plugin.document.name";
 
 	private static final String PROPERTY_PLUGIN_DISABLED = "module.document.export.error.plugin.disabled.message";
 
