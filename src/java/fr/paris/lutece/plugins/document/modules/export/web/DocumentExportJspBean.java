@@ -33,15 +33,6 @@
  */
 package fr.paris.lutece.plugins.document.modules.export.web;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.StringWriter;
-import java.util.List;
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import fr.paris.lutece.plugins.document.business.DocumentFilter;
 import fr.paris.lutece.plugins.document.modules.export.dto.exportdocument.ExportUserDocumentDTO;
 import fr.paris.lutece.plugins.document.modules.export.service.DocumentExportService;
@@ -53,6 +44,15 @@ import fr.paris.lutece.portal.service.util.AppLogService;
 import fr.paris.lutece.portal.service.util.AppPathService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.portal.web.admin.PluginAdminPageJspBean;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.StringWriter;
+import java.util.List;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import au.com.bytecode.opencsv.CSVWriter;
 
@@ -103,7 +103,7 @@ public class DocumentExportJspBean extends PluginAdminPageJspBean
 		/*
 		 * Construction du filtre
 		 */
-
+        filter.setLoadBinaries( false );
 		Locale locale = getLocale();
 
 		List<ExportUserDocumentDTO> listExportResults = _documentExportService.getListDocumentByFilter( filter, locale );
