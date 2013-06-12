@@ -83,14 +83,15 @@ public class DocumentExportJspBean extends PluginAdminPageJspBean
 
 	private static final String PROPERTY_PLUGIN_DISABLED = "module.document.export.error.plugin.disabled.message";
 
-	private DocumentExportService _documentExportService = ( DocumentExportService ) SpringContextService.getPluginBean( "document-export", "document-export.exportService" );
+    private DocumentExportService _documentExportService = SpringContextService
+            .getBean( "document-export.exportService" );
 
-	/**
-	 * Effectue l'export de la liste des documents
-	 * @param request la requete Http
-	 * @param response la reponse
-	 * @return
-	 */
+    /**
+     * Effectue l'export de la liste des documents
+     * @param request la requete Http
+     * @param response la reponse
+     * @return The next URL to redirect to
+     */
 	public String doExportDocumentsDataList( HttpServletRequest request, HttpServletResponse response )
 	{
 		if ( !PluginService.isPluginEnable( AppPropertiesService.getProperty( PROPERTY_DOCUMENT_PLUGIN_NAME, CONSTANT_DOCUMENT_PLUGIN_DEFAULT_NAME ) ) )

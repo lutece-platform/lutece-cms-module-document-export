@@ -42,8 +42,7 @@ import fr.paris.lutece.portal.service.spring.SpringContextService;
  */
 public final class DocumentExportHome
 {
-    private static IDocumentExportDAO _dao = (IDocumentExportDAO) SpringContextService.getPluginBean( "document-export",
-            "document-export.exportDAO" );
+    private static IDocumentExportDAO _dao = SpringContextService.getBean( "document-export.exportDAO" );
 
     /**
      * DocumentExportHome
