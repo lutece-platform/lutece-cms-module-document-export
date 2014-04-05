@@ -1,45 +1,45 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<parent>
-		<artifactId>lutece-plugins-pom</artifactId>
-		<groupId>fr.paris.lutece.plugins</groupId>
-		<version>3.5</version>
-	</parent>
+    <parent>
+        <artifactId>lutece-plugins-pom</artifactId>
+        <groupId>fr.paris.lutece.plugins</groupId>
+        <version>3.7</version>
+    </parent>
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>fr.paris.lutece.plugins</groupId>
-	<artifactId>module-document-export</artifactId>
-	<packaging>lutece-plugin</packaging>
-	<version>1.0.2-SNAPSHOT</version>
-	<name>Lutece document export module</name>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>fr.paris.lutece.plugins</groupId>
+    <artifactId>module-document-export</artifactId>
+    <packaging>lutece-plugin</packaging>
+    <version>1.0.2-SNAPSHOT</version>
+    <name>Lutece document export module</name>
 	
-	<repositories>
-	<repository>
-			<id>lutece</id>
-			<name>luteceRepository</name>
-			<url>http://dev.lutece.paris.fr/maven_repository</url>
-			<layout>default</layout>
-		</repository>
-	</repositories>	
+    <repositories>
+        <repository>
+            <id>lutece</id>
+            <name>luteceRepository</name>
+            <url>http://dev.lutece.paris.fr/maven_repository</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>	
 	
-	<dependencies>
-		<dependency>
-			<artifactId>plugin-document</artifactId>
-			<groupId>fr.paris.lutece.plugins</groupId>
-			<version>[3.0.1-SNAPSHOT,4.0.0-SNAPSHOT)</version>
-			<type>lutece-plugin</type>
-		</dependency>
-		<dependency>
-			<groupId>fr.paris.lutece</groupId>
-			<artifactId>lutece-core</artifactId>
-			<version>[3.0.2,)</version>
-			<type>lutece-core</type>
-		</dependency>
-		<dependency>
-      	  <groupId>net.sf.opencsv</groupId>
-      	  <artifactId>opencsv</artifactId>
-      	  <version>1.8</version>
+    <dependencies>
+        <dependency>
+            <artifactId>plugin-document</artifactId>
+            <groupId>fr.paris.lutece.plugins</groupId>
+            <version>[3.0.1-SNAPSHOT,)</version>
+            <type>lutece-plugin</type>
         </dependency>
-	</dependencies>
+        <dependency>
+            <groupId>fr.paris.lutece</groupId>
+            <artifactId>lutece-core</artifactId>
+            <version>[3.0.2,)</version>
+            <type>lutece-core</type>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>1.8</version>
+        </dependency>
+    </dependencies>
 
     <scm>
         <connection>scm:svn:http://dev.lutece.paris.fr/svn/lutece/portal/trunk/plugins/cms/module-document-export</connection>
@@ -48,9 +48,9 @@
     </scm>
     
     <properties>
-		<componentName>document-export</componentName>
-		<jiraProjectName>DOCUMENTEXPORT</jiraProjectName>
-		<jiraComponentId>10600</jiraComponentId>
-	</properties>
+        <componentName>document-export</componentName>
+        <jiraProjectName>DOCUMENTEXPORT</jiraProjectName>
+        <jiraComponentId>10600</jiraComponentId>
+    </properties>
 
 </project>
